@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="su" class="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diajar Basa Sunda - Kelas 10</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Custom scrollbar for better look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #2d3748;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #718096;
+        }
+        .dark ::-webkit-scrollbar-thumb:hover {
+            background: #a0aec0;
+        }
+        .content-card {
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .dark .content-card:hover {
+             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.25);
+        }
+        .hidden {
+            display: none;
+        }
+        .quiz-option {
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300">
+
+    <div class="flex flex-col lg:flex-row min-h-screen">
+        <!-- Sidebar/Navigation -->
+        <aside class="w-full lg:w-64 bg-white dark:bg-gray-800 shadow-lg lg:h-screen lg:sticky lg:top-0 p-4">
+            <h1 class="text-2xl font-bold text-blue-600 dark:text-blue-400">Diajar Basa Sunda</h1>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-6">Kelas 10 Kurikulum Merdeka</p>
+            
+            <nav class="space-y-2">
+                <a href="#" class="nav-link active-link" data-target="home">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                    Beranda
+                </a>
+                <a href="#" class="nav-link" data-target="biantara">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                    Materi Biantara
+                </a>
+                <a href="#" class="nav-link" data-target="paribasa">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                    Materi Paribasa
+                </a>
+                <a href="#" class="nav-link" data-target="panumbu-catur">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                    Materi Panumbu Catur
+                </a>
+                <a href="#" class="nav-link" data-target="kuis">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" viewBox="0 0 20 20" fill="currentColor"><path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z" /><path fill-rule="evenodd" d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" clip-rule="evenodd" /></svg>
+                    Kuis Latihan
+                </a>
+            </nav>
+
+            <div class="mt-8">
+                <label for="theme-toggle" class="flex items-center cursor-pointer">
+                    <div class="relative">
+                        <input type="checkbox" id="theme-toggle" class="sr-only">
+                        <div class="block bg-gray-600 w-14 h-8 rounded-full"></div>
+                        <div class="dot absolute left-1 top-1 bg-white w-6 h-6 rounded-full transition"></div>
+                    </div>
+                    <div class="ml-3 text-gray-700 dark:text-gray-300 font-medium">
+                        Mode Malam
+                    </div>
+                </label>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+            
+            <!-- Search Bar -->
+            <div class="mb-6 relative">
+                <input type="text" id="search-input" placeholder="Pilari materi di dieu..." class="w-full pl-10 pr-4 py-2 border rounded-full bg-white dark:bg-gray-700 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <svg class="w-5 h-5 text-gray-400 absolute top-1/2 left-3 transform -translate-y-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </div>
+            <div id="search-results" class="hidden mb-6"></div>
+
+            <!-- Content Sections -->
+            <div id="content-container">
+                <!-- Home Section -->
+                <section id="home" class="page-content">
+                    <div class="bg-blue-500 text-white p-8 rounded-xl shadow-lg">
+                        <h2 class="text-4xl font-bold">Wilujeng Sumping!</h2>
+                        <p class="mt-2 text-lg">Website diajar Basa Sunda kanggo kelas 10. Hayu urang mimitian diajar kalayan sumanget!</p>
+                    </div>
+                    <div class="mt-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="content-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow cursor-pointer" data-target="biantara">
+                            <h3 class="font-bold text-xl text-blue-600 dark:text-blue-400">Biantara</h3>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">Diajar seni nyarita di hareupeun balaréa kalayan hadé tur merenah.</p>
+                        </div>
+                        <div class="content-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow cursor-pointer" data-target="paribasa">
+                            <h3 class="font-bold text-xl text-green-600 dark:text-green-400">Paribasa</h3>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">Ngulik kabeungharan basa Sunda ngaliwatan ungkara pinuh hikmah.</p>
+                        </div>
+                        <div class="content-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow cursor-pointer" data-target="panumbu-catur">
+                            <h3 class="font-bold text-xl text-purple-600 dark:text-purple-400">Panumbu Catur</h3>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">Diajar jadi moderator nu pinter ngatur jalanna hiji acara atawa sawala.</p>
+                        </div>
+                         <div class="content-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow cursor-pointer" data-target="kuis">
+                            <h3 class="font-bold text-xl text-red-600 dark:text-red-400">Kuis Latihan</h3>
+                            <p class="mt-2 text-gray-600 dark:text-gray-400">Tes pamahaman anjeun kana materi nu geus diajarkeun.</p>
+                        </div>
+                    </div>
+                    <div id="progress-tracker" class="mt-8 bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                         <h3 class="font-bold text-xl mb-4">Progres Diajar</h3>
+                         <p class="text-gray-600 dark:text-gray-400">Progres anjeun bakal katingal di dieu saatos ngarengsekeun kuis.</p>
+                         <div id="quiz-progress" class="hidden mt-4">
+                             <p class="font-semibold">Skor Kuis Terakhir:</p>
+                             <p id="last-score" class="text-2xl font-bold text-blue-500"></p>
+                         </div>
+                    </div>
+                </section>
+
+                <!-- Biantara Section -->
+                <section id="biantara" class="page-content hidden">
+                    <article class="prose dark:prose-invert max-w-none bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                        <h2 class="text-3xl font-bold text-blue-600 dark:text-blue-400">Materi Biantara (Pidato)</h2>
+                        
+                        <h3>Panganteur: Naon ari Biantara téh?</h3>
+                        <p>Sobat, anjeun kungsi ningali jalma nyarita di panggung, dihareupeun loba jelema? Tah, éta téh ngaranna biantara. Jadi, <strong>biantara</strong> téh nyaéta kagiatan nyarita di hareupeun balaréa (umum) pikeun nepikeun hiji maksud atawa informasi anu penting. Jalma anu ahli biantara disebutna <strong>orator</strong>.</p>
+
+                        <h3>Struktur Biantara: Siga Kumaha Runtuyanana?</h3>
+                        <p>Sangkan biantara urang alus tur kaharti ku balaréa, kudu disusun kalayan bener. Ieu struktur umumna:</p>
+                        <div class="space-y-4 border-l-4 border-blue-500 pl-4 py-2">
+                            <div>
+                                <h4 class="font-bold">1. Bubuka (Pembukaan)</h4>
+                                <p>Ieu bagian munggaran. Isina biasana:</p>
+                                <ul class="list-disc list-inside">
+                                    <li><strong>Salam Bubuka:</strong> Contona, "Assalamu'alaikum Wr. Wb.", "Sampurasun!".</li>
+                                    <li><strong>Mukadimah/Panghormat:</strong> Ngahaturkeun nuhun ka hadirin jeung pupuhu acara.</li>
+                                    <li><strong>Ngagambarkeun Eusi:</strong> Nepikeun topik naon anu rék dicaritakeun.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">2. Eusi (Isi)</h4>
+                                <p>Ieu bagian inti tina biantara. Di dieu urang nepikeun sagala informasi, gagasan, atawa pesan anu hayang ditepikeun. Eusina kudu jelas, padet, jeung berurutan sangkan gampang dipikaharti.</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold">3. Panutup (Penutup)</h4>
+                                <p>Bagian pamungkas. Isina biasana:</p>
+                                 <ul class="list-disc list-inside">
+                                    <li><strong>Kacindekan (Kesimpulan):</strong> Ringkesan tina eusi biantara.</li>
+                                    <li><strong>Hapunten (Permohonan Maaf):</strong> Ménta dihampura bisi aya cariosan anu salah.</li>
+                                    <li><strong>Salam Panutup:</strong> Contona, "Wassalamu'alaikum Wr. Wb.".</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <h3>Métode Biantara</h3>
+                        <p>Aya sababaraha cara atawa métode pikeun nepikeun biantara, di antarana:</p>
+                        <ul class="list-decimal list-inside space-y-2">
+                            <li><strong>Métode Impromptu (Nalar/Dadakan):</strong> Biantara anu ditepikeun tanpa persiapan nanaon. Biasana dilakukeun ku jalma anu geus biasa nyarita.</li>
+                            <li><strong>Métode Naskah (Maca Naskah):</strong> Biantara ku cara maca sakabéh naskah anu geus disiapkeun ti saméméhna.</li>
+                            <li><strong>Métode Ékstémporan (Catetan):</strong> Biantara ku cara mawa catetan leutik anu eusina ngan gurat badag atawa poin-poin penting hungkul.</li>
+                            <li><strong>Métode Memoriter (Talaran):</strong> Biantara ku cara ngapalkeun sakabéh eusi naskah.</li>
+                        </ul>
+
+                        <h3>Conto Singget Biantara</h3>
+                        <blockquote>
+                            <p class="font-semibold">Topik: Mieling Poe Kamerdekaan</p>
+                            <p><strong>(Bubuka)</strong><br>Assalamualaikum Wr. Wb. Sampurasun! Langkung ti payun, hayu urang sami-sami manjatkeun puji sinareng sukur ka hadirat Ilahi Robbi...</p>
+                            <p><strong>(Eusi)</strong><br>Dinten ieu, urang sadaya kempel ngariung dina raraga mieling dinten kamerdekaan nagara urang, Indonesia, anu ka-sekian. Kamerdekaan ieu sanes hadiah, tapi hasil perjuangan para pahlawan. Ku kituna, kawajiban urang salaku generasi ngora nyaéta ngeusian ieu kamerdekaan ku hal-hal anu positif, sapertos diajar sing soson-soson...</p>
+                            <p><strong>(Panutup)</strong><br>Rupina sakitu anu kapihatur, hapunten bilih aya basa anu teu merenah. Hatur nuhun kana perhatosanana. Wassalamualaikum Wr. Wb.</p>
+                        </blockquote>
+                        
+                        <h3>Rangkuman</h3>
+                        <p>Biantara téh nyaéta nyarita di hareupeun umum. Strukturna ngawengku <strong>bubuka, eusi, jeung panutup</strong>. Métodena aya opat: <strong>impromptu, naskah, ékstémporan, jeung memoriter</strong>. Kuncina nyaéta latihan jeung percaya diri!</p>
+                    </article>
+                </section>
+
+                <!-- Paribasa Section -->
+                <section id="paribasa" class="page-content hidden">
+                    <article class="prose dark:prose-invert max-w-none bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                        <h2 class="text-3xl font-bold text-green-600 dark:text-green-400">Materi Paribasa</h2>
+
+                        <h3>Panganteur: Naon ari Paribasa?</h3>
+                        <p>Sobat, dina basa Sunda loba pisan ungkara-ungkara nu endah tur pinuh ku harti. Salah sahijina nyaéta <strong>paribasa</strong>. Paribasa nyaéta babandingan anu jadi perlambang lakuning hirup, eusina mangrupa படிப்பितutur atawa panyaram. Bentukna geus matok (tetap) jeung teu bisa dirobah.</p>
+                        <p>Paribasa téh kaasup kana pakeman basa, nyaéta ungkara anu wangunna geus matok sarta ngabogaan harti husus.</p>
+                        
+                        <h3>Jenis-jenis Pakeman Basa</h3>
+                        <p>Anu kaasup pakeman basa téh lain paribasa wungkul, aya ogé nu séjénna. Hayu urang tingali:</p>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead>
+                                    <tr>
+                                        <th class="px-4 py-2 border dark:border-gray-600 text-left">Jenis</th>
+                                        <th class="px-4 py-2 border dark:border-gray-600 text-left">Katerangan & Conto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="border dark:border-gray-600 px-4 py-2 font-semibold">Babasan</td>
+                                        <td class="border dark:border-gray-600 px-4 py-2">Ungkara pondok anu ngagambarkeun kaayaan atawa pasipatan jalma. Contona: <em>panjang leungeun</em> (suka maling), <em>hampang birit</em> (getol/rajin).</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border dark:border-gray-600 px-4 py-2 font-semibold">Paribasa</td>
+                                        <td class="border dark:border-gray-600 px-4 py-2">Ungkara nu leuwih panjang ti batan babasan, ngandung piwuruk atawa piluangeun. Dibagi jadi tilu:
+                                            <ul class="list-disc pl-5 mt-1">
+                                                <li><strong>Wawaran Luang:</strong> Eusina pépéling atawa pangajaran. Conto: <em>kudu hadé gogog hadé tagog</em> (kudu hadé basa jeung tingkah laku).</li>
+                                                <li><strong>Pangjurung Laku Hadé:</strong> Eusina ngajurung kana kahadéan. Conto: <em>kudu bisa ngeureut neundeun</em> (kudu bisa ngatur rejeki, ulah boros).</li>
+                                                <li><strong>Panyaram Laku Goréng:</strong> Eusina nyaram milampah pagawéan goréng. Conto: <em>ulah pagiri-giri calik, pagirang-girang tampian</em> (ulah parebut kakawasaan/kalungguhan).</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>Conto Paribasa jeung Hartina</h3>
+                        <ul class="space-y-3 mt-4">
+                            <li class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                                <p><strong>"Adat kakurung ku iga."</strong></p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Hartina: Kalakuan goréng anu hésé dileungitkeunana.</p>
+                            </li>
+                            <li class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                                <p><strong>"Caina hérang, laukna beunang."</strong></p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Hartina: Ngahontal maksud ku cara anu wijaksana, tanpa nimbulkeun masalah.</p>
+                            </li>
+                            <li class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                                <p><strong>"Indung tunggul rahayu, bapa tangkal darajat."</strong></p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Hartina: Kasalametan jeung darajat anak gumantung kana karidoan indung jeung bapa.</p>
+                            </li>
+                            <li class="p-4 bg-gray-100 dark:bg-gray-700 rounded-lg">
+                                <p><strong>"Ulah ngukur baju sasereg awak."</strong></p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Hartina: Ulah nyaruakeun kamampuh atawa kaayaan batur jeung diri sorangan.</p>
+                            </li>
+                        </ul>
+
+                        <h3>Rangkuman</h3>
+                        <p>Paribasa jeung babasan téh bagian tina <strong>pakeman basa</strong> anu wangunna matok. Duanana ngandung harti kiasan sarta jadi cerminan budaya jeung pamikiran urang Sunda. Ngartikeun paribasa hartina urang diajar ngeunaan kahirupan.</p>
+                    </article>
+                </section>
+
+                <!-- Panumbu Catur Section -->
+                <section id="panumbu-catur" class="page-content hidden">
+                    <article class="prose dark:prose-invert max-w-none bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+                        <h2 class="text-3xl font-bold text-purple-600 dark:text-purple-400">Materi Panumbu Catur (Moderator)</h2>
+                        
+                        <h3>Panganteur: Saha ari Panumbu Catur téh?</h3>
+                        <p>Sobat, mun anjeun miluan hiji diskusi atawa seminar, sok aya jalma anu mingpin acarana, pan? Anu ngenalkeun panyatur, anu ngatur saha nu rék nanya. Tah, éta pisan anu disebut <strong>panumbu catur</strong> atawa moderator.</p>
+                        <p>Jadi, panumbu catur téh jalma anu boga pancén pikeun ngatur, ngarahkeun, jeung mingpin jalanna hiji acara sawala (diskusi) sangkan lumangsung kalayan lancar, tartib, jeung nepi ka tujuanana.</p>
+
+                        <h3>Pancén (Tugas) Panumbu Catur</h3>
+                        <p>Sangkan jadi panumbu catur anu hadé, kudu apal naon waé pancénna. Ieu di antarana:</p>
+                        <div class="bg-purple-100 dark:bg-purple-900/30 p-4 rounded-lg">
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 text-purple-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Muka Acara Sawala:</strong> Ngucapkeun salam, ngajelaskeun topik jeung tujuan sawala.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 text-purple-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Ngenalkeun Pangjejer (Narasumber):</strong> Macakeun riwayat hirup (CV) singget ti unggal pangjejer.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 text-purple-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Ngatur Waktu:</strong> Mastikeun pangjejer nyarita saluyu jeung waktu nu disadiakeun.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 text-purple-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Mingpin Sési Tanya Jawab:</strong> Méré kasempetan ka pamilon pikeun nanya jeung mastikeun pertanyaan dijawab ku pangjejer nu pas.</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <svg class="w-6 h-6 text-purple-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Nyieun Kacindekan (Kesimpulan):</strong> Nyimpulkeun hasil sawala saméméh acara ditutup.</span>
+                                </li>
+                                 <li class="flex items-start">
+                                    <svg class="w-6 h-6 text-purple-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span><strong>Nutup Acara Sawala:</strong> Ngahaturkeun nuhun ka pangjejer jeung pamilon, tuluy nutup acara.</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <h3>Sikep Panumbu Catur</h3>
+                        <p>Salian ti pancén, sikep ogé penting pisan. Panumbu catur kudu:</p>
+                        <ul>
+                            <li><strong>Adil:</strong> Teu mihak ka salah sahiji pangjejer atawa pamilon.</li>
+                            <li><strong>Sopan:</strong> Ngagunakeun basa anu hormat jeung santun.</li>
+                            <li><strong>Pinter jeung Tanggap:</strong> Kudu ngarti kana materi anu dibahas sangkan bisa ngarahkeun sawala kalayan alus.</li>
+                            <li><strong>Percaya Diri:</strong> Teu éraan atawa gugup di hareupeun umum.</li>
+                        </ul>
+                        
+                        <h3>Conto Ungkara Panumbu Catur</h3>
+                        <blockquote>
+                            <p><strong>(Muka)</strong><br>"Wilujeng enjing ka sadayana. Hatur nuhun kana kasumpingan Bapa, Ibu, miwah réréncangan sadaya. Dinten ieu, urang baris medar perkawis 'Pangaruh Media Sosial ka Rengking Basa Sunda'. Kanggo medar ieu jejer, parantos sayogi dua urang pangjejer anu ahli di bidangna..."</p>
+                            <p><strong>(Ngatur Tanya Jawab)</strong><br>"Hatur nuhun ka Bapa Ahmad kana pedaranana. Ayeuna urang lajengkeun kana sési tanya jawab. Mangga, ka para pamilon anu badé naros, dihaturanan ngacungkeun pananganna..."</p>
+                             <p><strong>(Nutup)</strong><br>"Alhamdulillah, sadaya rangkéan acara parantos kalaklaksanakeun. Kacindekan tina sawala dinten ieu nyaéta... Sim kuring salaku panumbu catur ngahaturkeun nuhun. Wassalamualaikum Wr. Wb."</p>
+                        </blockquote>
+
+                        <h3>Rangkuman</h3>
+                        <p>Panumbu catur téh ibarat nahkoda dina hiji kapal sawala. Peranna pohara penting pikeun nangtukeun lancar henteuna acara. Pancénna ngawengku ti mimiti muka, ngatur, nepi ka nutup acara. Sikep anu <strong>adil, sopan, pinter, jeung percaya diri</strong> jadi konci kasuksésan jadi panumbu catur.</p>
+                    </article>
+                </section>
+
+                <!-- Kuis Section -->
+                <section id="kuis" class="page-content hidden">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow w-full max-w-4xl mx-auto">
+                        <div id="quiz-start-screen">
+                            <h2 class="text-3xl font-bold text-red-600 dark:text-red-400 mb-4">Kuis Latihan Gabungan</h2>
+                            <p class="mb-6">Tes pamahaman anjeun kana materi Biantara, Paribasa, jeung Panumbu Catur. Aya 20 patarosan pilihan ganda. Pék pilih jawaban anu paling bener. Good luck!</p>
+                            <button id="start-quiz-btn" class="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300">Mimitian Kuis!</button>
+                        </div>
+                        
+                        <div id="quiz-container" class="hidden">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-xl font-semibold">Patarosan <span id="question-number"></span> tina 20</h3>
+                                <p class="font-bold text-lg">Skor: <span id="score">0</span></p>
+                            </div>
+                            <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 mb-6">
+                                <div id="progress-bar" class="bg-red-500 h-2.5 rounded-full" style="width: 0%"></div>
+                            </div>
+                            <p id="question-text" class="text-xl font-medium mb-6"></p>
+                            <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <!-- Options will be generated by JS -->
+                            </div>
+                            <div id="feedback-container" class="mt-6 p-4 rounded-lg hidden">
+                                <p id="feedback-text" class="font-semibold"></p>
+                                <p id="explanation-text" class="mt-2"></p>
+                            </div>
+                            <button id="next-question-btn" class="w-full mt-6 bg-gray-700 hover:bg-gray-800 dark:bg-gray-600 dark:hover:bg-gray-500 text-white font-bold py-3 px-4 rounded-lg transition duration-300 hidden">Patarosan Salajengna</button>
+                        </div>
+
+                        <div id="quiz-end-screen" class="hidden text-center">
+                            <h2 class="text-3xl font-bold mb-4">Kuis Rengse!</h2>
+                            <p class="text-xl mb-2">Skor Ahir Anjeun:</p>
+                            <p id="final-score" class="text-6xl font-bold text-red-500 mb-6"></p>
+                            <p id="final-message" class="text-lg mb-8"></p>
+                            <button id="retry-quiz-btn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">Ulangi Kuis</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // --- Theme Switcher ---
+    const themeToggle = document.getElementById('theme-toggle');
+    const html = document.documentElement;
+
+    // On page load or when changing themes, best to add inline in `head` to avoid FOUC
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        html.classList.add('dark');
+        themeToggle.checked = true;
+    } else {
+        html.classList.remove('dark');
+        themeToggle.checked = false;
+    }
+
+    themeToggle.addEventListener('click', () => {
+        html.classList.toggle('dark');
+        if (html.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+        } else {
+            localStorage.setItem('theme', 'light');
+        }
+    });
+
+    // --- Navigation ---
+    const navLinks = document.querySelectorAll('.nav-link');
+    const contentCards = document.querySelectorAll('.content-card');
+    const pageContents = document.querySelectorAll('.page-content');
+    const searchInput = document.getElementById('search-input');
+    const searchResultsContainer = document.getElementById('search-results');
+    const contentContainer = document.getElementById('content-container');
+
+    function switchPage(targetId) {
+        pageContents.forEach(page => {
+            page.classList.add('hidden');
+        });
+        const targetPage = document.getElementById(targetId);
+        if (targetPage) {
+            targetPage.classList.remove('hidden');
+        }
+
+        navLinks.forEach(link => {
+            link.classList.remove('active-link', 'bg-blue-100', 'dark:bg-blue-900', 'text-blue-600', 'dark:text-blue-300', 'font-semibold');
+             link.classList.add('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-100', 'dark:hover:bg-gray-700');
+            if (link.dataset.target === targetId) {
+                link.classList.add('active-link', 'bg-blue-100', 'dark:bg-blue-900', 'text-blue-600', 'dark:text-blue-300', 'font-semibold');
+                link.classList.remove('text-gray-600', 'dark:text-gray-400');
+            }
+        });
+        
+        // Reset search
+        searchInput.value = '';
+        searchResultsContainer.classList.add('hidden');
+        contentContainer.classList.remove('hidden');
+        window.scrollTo(0, 0);
+    }
+    
+    navLinks.forEach(link => {
+        // Initial styling
+        link.classList.add('flex', 'items-center', 'p-2', 'rounded-lg', 'transition-colors', 'duration-200');
+        if(!link.classList.contains('active-link')) {
+            link.classList.add('text-gray-600', 'dark:text-gray-400', 'hover:bg-gray-100', 'dark:hover:bg-gray-700');
+        } else {
+            link.classList.add('bg-blue-100', 'dark:bg-blue-900', 'text-blue-600', 'dark:text-blue-300', 'font-semibold');
+        }
+
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = e.currentTarget.dataset.target;
+            switchPage(targetId);
+        });
+    });
+
+    contentCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+            const targetId = e.currentTarget.dataset.target;
+            switchPage(targetId);
+        });
+    });
+
+    // --- Quiz Logic ---
+    const quizData = [
+        {
+            question: "Kagiatan nyarita di hareupeun balaréa pikeun nepikeun hiji maksud disebut...",
+            options: ["Sawala", "Biantara", "Wawancara", "Paguneman"],
+            answer: "Biantara",
+            explanation: "Biantara nyaéta kagiatan nyarita di hareupeun umum atawa balaréa. Beda jeung sawala (diskusi) atawa paguneman (percakapan)."
+        },
+        {
+            question: "Bagian biantara anu eusina salam, panghormat, jeung ngagambarkeun eusi disebut...",
+            options: ["Eusi", "Panutup", "Bubuka", "Kacindekan"],
+            answer: "Bubuka",
+            explanation: "Bubuka mangrupa bagian awal biantara anu eusina salam, panghormat ka hadirin, jeung nepikeun jejer (topik) anu rék dibahas."
+        },
+        {
+            question: "Jalma anu ahli dina nepikeun biantara sok disebut ogé...",
+            options: ["Orator", "Moderator", "Pangjejer", "Pamilon"],
+            answer: "Orator",
+            explanation: "Orator nyaéta sebutan pikeun jalma anu parigel atawa ahli dina nepikeun biantara (pidato)."
+        },
+        {
+            question: "Métode biantara ku cara maca sakabéh naskah anu geus disiapkeun disebut métode...",
+            options: ["Impromptu", "Ékstémporan", "Memoriter", "Naskah"],
+            answer: "Naskah",
+            explanation: "Métode naskah nyaéta biantara ku cara maca langsung naskah anu geus disiapkeun ti anggalna."
+        },
+        {
+            question: "Ménta dihampura bisi aya cariosan anu salah mangrupa bagian tina ... biantara.",
+            options: ["Eusi", "Bubuka", "Panutup", "Salam"],
+            answer: "Panutup",
+            explanation: "Dina bagian panutup, saurang orator biasana nepikeun kacindekan, ménta dihampura, jeung ngucapkeun salam panutup."
+        },
+        {
+            question: "Paribasa 'Adat kakurung ku iga' ngabogaan harti...",
+            options: ["Kalakuan hadé nu matak tuladeun", "Kalakuan goréng nu hésé leungitna", "Adat istiadat nu kudu dipiara", "Mawa karep sorangan"],
+            answer: "Kalakuan goréng nu hésé leungitna",
+            explanation: "Iga ngalambangkeun awak. Jadi, adat anu geus napel dina awak (kakurung ku iga) hésé pisan pikeun dirobahna, utamana adat goréng."
+        },
+        {
+            question: "'Panjang leungeun' kaasup kana jenis pakeman basa...",
+            options: ["Paribasa", "Rakitan Lantip", "Babasan", "Kecap Kiasan"],
+            answer: "Babasan",
+            explanation: "Babasan nyaéta ungkara pondok anu ngandung harti kiasan, contona 'panjang leungeun' nu hartina sok maok. Bentukna leuwih pondok tibatan paribasa."
+        },
+        {
+            question: "Paribasa 'Caina hérang, laukna beunang' ngandung piwuruk sangkan urang...",
+            options: ["Kudu getol usaha sangkan hasil", "Ngahontal tujuan ku cara kasar", "Ngahontal tujuan ku cara wijaksana", "Ulah gampang putus asa"],
+            answer: "Ngahontal tujuan ku cara wijaksana",
+            explanation: "Harti tina paribasa ieu nyaéta ngaréngsékeun masalah atawa ngahontal tujuan ku cara anu alus, tartib, tur teu nimbulkeun masalah anyar."
+        },
+        {
+            question: "Jalma nu getol tur daékan digawé disebut...",
+            options: ["Gedé hulu", "Hampang leungeun", "Hampang birit", "Beurat birit"],
+            answer: "Hampang birit",
+            explanation: "'Hampang birit' hartina jalma anu babari dititah jeung rajin. Sabalikna nyaéta 'beurat birit' (kedul/males)."
+        },
+        {
+            question: "'Ulah ngukur baju sasereg awak' hartina...",
+            options: ["Kudu nyieun baju nu pas", "Ulah nyaruakeun batur jeung diri sorangan", "Kudu bisa adaptasi di mana waé", "Ulah sombong ku kaayaan"],
+            answer: "Ulah nyaruakeun batur jeung diri sorangan",
+            explanation: "Paribasa ieu mapatahan yén kamampuh, rejeki, atawa kaayaan unggal jalma téh béda-béda, jadi ulah disaruakeun."
+        },
+        {
+            question: "Jalma anu pancénna ngatur jeung mingpin jalanna sawala disebut...",
+            options: ["Panumbu catur", "Pangjejer", "Girimis", "Pamilon"],
+            answer: "Panumbu catur",
+            explanation: "Panumbu catur (moderator) boga tugas utama pikeun ngatur jalanna diskusi ti mimiti nepi ka ahir."
+        },
+        {
+            question: "Ieu di handap anu LAIN pancén panumbu catur nyaéta...",
+            options: ["Muka acara sawala", "Ngenalkeun pangjejer", "Nepikeun materi sacara jero", "Nyieun kacindekan"],
+            answer: "Nepikeun materi sacara jero",
+            explanation: "Anu nepikeun materi sacara jero tur lengkep mah pancénna pangjejer (narasumber), sanés panumbu catur."
+        },
+        {
+            question: "Sikep panumbu catur anu teu mihak ka salah sahiji pihak disebut...",
+            options: ["Sopan", "Tanggap", "Adil", "Percaya diri"],
+            answer: "Adil",
+            explanation: "Adil mangrupa sikep penting sangkan panumbu catur bisa méré kasempetan anu sarua ka sakabéh pangjejer jeung pamilon."
+        },
+        {
+            question: "Macakeun riwayat hirup (CV) singget ti narasumber nyaéta salah sahiji pancén...",
+            options: ["Notulén", "Panumbu catur", "Pupuhu acara", "Pangjejer"],
+            answer: "Panumbu catur",
+            explanation: "Saacan pangjejer nepikeun materina, panumbu catur biasana bakal ngenalkeun heula profil singkatna sangkan pamilon apal."
+        },
+        {
+            question: "'Hatur nuhun ka Bapa/Ibu... ayeuna urang lajengkeun kana sési tanya jawab'. Éta conto ungkara anu diucapkeun ku...",
+            options: ["Pangjejer", "Panumbu catur", "Pamilon", "Notulén"],
+            answer: "Panumbu catur",
+            explanation: "Kalimah éta mangrupa kalimah transisi anu ilahar diucapkeun ku panumbu catur pikeun pindah tina sési materi ka sési tanya jawab."
+        },
+        {
+            question: "Ungkara 'Kudu hadé gogog hadé tagog' kaasup kana paribasa...",
+            options: ["Panyaram laku goréng", "Wawaran luang", "Pangjurung laku hadé", "Babasan"],
+            answer: "Wawaran luang",
+            explanation: "Paribasa ieu eusina pépéling atawa pangajaran (wawaran) yén urang kudu hadé basa (gogog) jeung hadé tingkah laku (tagog)."
+        },
+        {
+            question: "Biantara anu ditepikeun ngadadak tanpa persiapan nanaon disebut métode...",
+            options: ["Naskah", "Memoriter", "Ékstémporan", "Impromptu"],
+            answer: "Impromptu",
+            explanation: "Impromptu nyaéta métode biantara anu sifatna dadakan, langsung nyarita tanpa aya persiapan naskah atawa catetan heula."
+        },
+        {
+            question: "Naon bédana paribasa jeung babasan?",
+            options: ["Paribasa leuwih pondok", "Babasan mangrupa kalimah lengkep", "Babasan leuwih pondok jeung ngagambarkeun sipat", "Teu aya bédana"],
+            answer: "Babasan leuwih pondok jeung ngagambarkeun sipat",
+            explanation: "Umumna, babasan leuwih pondok (dua kecap) jeung ngagambarkeun kaayaan/sipat, sedengkeun paribasa leuwih panjang (wangun kalimah) sarta ngandung piwuruk."
+        },
+        {
+            question: "Nyieun kacindekan (kesimpulan) tina hasil sawala mangrupa pancén panumbu catur dina bagian...",
+            options: ["Bubuka", "Eusi", "Tanya Jawab", "Panutup"],
+            answer: "Panutup",
+            explanation: "Saacan nutup acara, panumbu catur boga pancén penting pikeun nyindekkeun pedaran ti sakabéh pangjejer sarta hasil diskusi."
+        },
+        {
+            question: "Di handap ieu mangrupa salam bubuka dina biantara Sunda, iwal...",
+            options: ["Assalamu'alaikum Wr. Wb.", "Sampurasun!", "Wilujeng enjing/siang/sonten/wengi", "Hatur nuhun"],
+            answer: "Hatur nuhun",
+            explanation: "'Hatur nuhun' mah sanés salam bubuka, tapi mangrupa ungkara pikeun nganuhunkeun, biasana diucapkeun sanggeus meunang panghormat atawa dina panutup."
+        }
+    ];
+
+    const quizStartScreen = document.getElementById('quiz-start-screen');
+    const startQuizBtn = document.getElementById('start-quiz-btn');
+    const quizContainer = document.getElementById('quiz-container');
+    const quizEndScreen = document.getElementById('quiz-end-screen');
+    const questionNumberEl = document.getElementById('question-number');
+    const scoreEl = document.getElementById('score');
+    const progressBar = document.getElementById('progress-bar');
+    const questionTextEl = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const feedbackContainer = document.getElementById('feedback-container');
+    const feedbackTextEl = document.getElementById('feedback-text');
+    const explanationTextEl = document.getElementById('explanation-text');
+    const nextQuestionBtn = document.getElementById('next-question-btn');
+    const retryQuizBtn = document.getElementById('retry-quiz-btn');
+    const finalScoreEl = document.getElementById('final-score');
+    const finalMessageEl = document.getElementById('final-message');
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let shuffledQuestions = [];
+
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startQuiz() {
+        quizStartScreen.classList.add('hidden');
+        quizEndScreen.classList.add('hidden');
+        quizContainer.classList.remove('hidden');
+        
+        currentQuestionIndex = 0;
+        score = 0;
+        shuffledQuestions = shuffleArray([...quizData]);
+        scoreEl.textContent = score;
+        loadQuestion();
+    }
+
+    function loadQuestion() {
+        feedbackContainer.classList.add('hidden');
+        nextQuestionBtn.classList.add('hidden');
+        optionsContainer.innerHTML = '';
+
+        const currentQuestion = shuffledQuestions[currentQuestionIndex];
+        questionNumberEl.textContent = currentQuestionIndex + 1;
+        questionTextEl.textContent = currentQuestion.question;
+        
+        const progressPercentage = ((currentQuestionIndex) / quizData.length) * 100;
+        progressBar.style.width = `${progressPercentage}%`;
+
+        currentQuestion.options.forEach(option => {
+            const button = document.createElement('button');
+            button.textContent = option;
+            button.classList.add('quiz-option', 'w-full', 'text-left', 'p-4', 'rounded-lg', 'border', 'border-gray-300', 'dark:border-gray-600', 'hover:bg-gray-100', 'dark:hover:bg-gray-700');
+            button.addEventListener('click', selectAnswer);
+            optionsContainer.appendChild(button);
+        });
+    }
+
+    function selectAnswer(e) {
+        const selectedButton = e.target;
+        const selectedAnswer = selectedButton.textContent;
+        const currentQuestion = shuffledQuestions[currentQuestionIndex];
+        const correctAnswer = currentQuestion.answer;
+
+        Array.from(optionsContainer.children).forEach(button => {
+            button.disabled = true; // Disable all options
+            if (button.textContent === correctAnswer) {
+                button.classList.remove('border-gray-300', 'dark:border-gray-600');
+                button.classList.add('bg-green-100', 'dark:bg-green-900', 'border-green-500', 'font-semibold');
+            }
+        });
+
+        if (selectedAnswer === correctAnswer) {
+            score += 1;
+            scoreEl.textContent = score;
+            feedbackTextEl.textContent = "Leres! Jawaban anjeun bener.";
+            feedbackContainer.classList.remove('bg-red-100', 'dark:bg-red-900');
+            feedbackContainer.classList.add('bg-green-100', 'dark:bg-green-900');
+        } else {
+            selectedButton.classList.remove('border-gray-300', 'dark:border-gray-600');
+            selectedButton.classList.add('bg-red-100', 'dark:bg-red-900', 'border-red-500');
+            feedbackTextEl.textContent = "Salah! Jawaban nu bener nyaéta...";
+            feedbackContainer.classList.remove('bg-green-100', 'dark:bg-green-900');
+            feedbackContainer.classList.add('bg-red-100', 'dark:bg-red-900');
+        }
+
+        explanationTextEl.textContent = currentQuestion.explanation;
+        feedbackContainer.classList.remove('hidden');
+        nextQuestionBtn.classList.remove('hidden');
+        
+        const progressPercentage = ((currentQuestionIndex + 1) / quizData.length) * 100;
+        progressBar.style.width = `${progressPercentage}%`;
+    }
+
+    function showNextQuestion() {
+        currentQuestionIndex++;
+        if (currentQuestionIndex < quizData.length) {
+            loadQuestion();
+        } else {
+            endQuiz();
+        }
+    }
+
+    function endQuiz() {
+        quizContainer.classList.add('hidden');
+        quizEndScreen.classList.remove('hidden');
+
+        finalScoreEl.textContent = `${score} / ${quizData.length}`;
+        let message = "";
+        const percentage = (score / quizData.length) * 100;
+        if (percentage >= 80) {
+            message = "Luar biasa! Anjeun parantos paham pisan kana materi ieu.";
+        } else if (percentage >= 60) {
+            message = "Saé! Pamahaman anjeun geus alus, tinggal di-review saeutik deui.";
+        } else {
+            message = "Hayu leuwih sumanget deui! Coba baca deui materina terus kerjakeun deui kuisna.";
+        }
+        finalMessageEl.textContent = message;
+
+        // Update progress tracker on home
+        const quizProgress = document.getElementById('quiz-progress');
+        const lastScore = document.getElementById('last-score');
+        quizProgress.classList.remove('hidden');
+        lastScore.textContent = `${score} / ${quizData.length}`;
+        localStorage.setItem('lastQuizScore', `${score} / ${quizData.length}`);
+    }
+
+    startQuizBtn.addEventListener('click', startQuiz);
+    nextQuestionBtn.addEventListener('click', showNextQuestion);
+    retryQuizBtn.addEventListener('click', () => {
+        quizEndScreen.classList.add('hidden');
+        quizStartScreen.classList.remove('hidden');
+    });
+
+    // --- Search Logic ---
+    const allArticles = Array.from(document.querySelectorAll('section article'));
+    const searchableData = allArticles.map((article, index) => ({
+        id: index,
+        title: article.querySelector('h2').textContent,
+        content: article.textContent,
+        target: article.parentElement.id
+    }));
+
+    const fuse = new Fuse(searchableData, {
+        keys: ['title', 'content'],
+        includeScore: true,
+        threshold: 0.4,
+    });
+    
+    searchInput.addEventListener('input', () => {
+        const query = searchInput.value.trim();
+        if (query.length > 2) {
+            const results = fuse.search(query);
+            contentContainer.classList.add('hidden');
+            searchResultsContainer.classList.remove('hidden');
+            searchResultsContainer.innerHTML = '';
+
+            if(results.length > 0) {
+                 const resultHeader = document.createElement('h3');
+                 resultHeader.className = 'text-lg font-semibold mb-4';
+                 resultHeader.textContent = `Hasil Pilarian pikeun "${query}":`;
+                 searchResultsContainer.appendChild(resultHeader);
+                
+                results.forEach(result => {
+                    const item = result.item;
+                    const resultEl = document.createElement('div');
+                    resultEl.className = 'mb-4 p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700';
+                    resultEl.innerHTML = `<h4 class="font-bold text-blue-600 dark:text-blue-400">${item.title}</h4><p class="text-sm text-gray-600 dark:text-gray-400 mt-1">${item.content.substring(0, 150)}...</p>`;
+                    resultEl.addEventListener('click', () => {
+                        switchPage(item.target);
+                    });
+                    searchResultsContainer.appendChild(resultEl);
+                });
+            } else {
+                searchResultsContainer.innerHTML = `<p class="text-center text-gray-500 dark:text-gray-400">Teu aya materi anu cocog sareng "${query}".</p>`;
+            }
+        } else {
+            contentContainer.classList.remove('hidden');
+            searchResultsContainer.classList.add('hidden');
+        }
+    });
+
+    // --- Progress Tracker ---
+    const savedScore = localStorage.getItem('lastQuizScore');
+    if (savedScore) {
+        const quizProgress = document.getElementById('quiz-progress');
+        const lastScore = document.getElementById('last-score');
+        quizProgress.classList.remove('hidden');
+        lastScore.textContent = savedScore;
+    }
+});
+</script>
+
+</body>
+</html>
